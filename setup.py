@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = "uptime-client",
+    name = "uptime_client",
 
     version = "0.1",
 
@@ -19,9 +19,9 @@ setup(
 
     url="",
     
-    packages = find_packages("uptime-client"), 
+    packages = find_packages("src"), 
 
-    package_dir = {"":"uptime-client"},
+    package_dir = {"":"src"},
 
     zip_safe = True,
     
@@ -29,7 +29,7 @@ setup(
     
     entry_points = {
         "console_scripts": [
-            "uptime-client = client.func:main",
+            "uptime_client = client.func:main",
         ]
     },
 )
