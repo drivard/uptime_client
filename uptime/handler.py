@@ -38,16 +38,18 @@ def uptime_handler():
     with open("/proc/uptime", "r") as file:
         raw_seconds = file.read().split()[0]
         
+    raw_seconds = float(raw_seconds)    
+
     # The string containing the uptime information
-    computer_uptime = str(datetime.timedelta(seconds=float(raw_seconds)))
+    computer_uptime = str(datetime.timedelta(seconds=raw_seconds))
     computer_uptime = computer_uptime.split('.')[0]
     
     # Extract the informations
-    days = computer_uptime.split()[0]
+    days = int(computer_uptime.split()[0])
     s_time = computer_uptime.split()[2]
-    hours = s_time.split(':')[0]
-    minutes = s_time.split(':')[1]
-    seconds = s_time.split(':')[2]
+    hours = int(s_time.split(':')[0])
+    minutes = int(s_time.split(':')[1])
+    seconds = int(s_time.split(':')[2])
     
     # Return the uptime minus the milliseconds information
     return days, hours, minutes, seconds, computer_uptime, raw_seconds
