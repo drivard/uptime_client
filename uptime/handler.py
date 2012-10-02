@@ -42,7 +42,7 @@ def uptime_handler():
     seconds = s_time.split(':')[2]
     
     # Return the uptime minus the milliseconds information
-    return days, hours, minutes, seconds, computer_uptime
+    return days, hours, minutes, seconds, computer_uptime, seconds
     
 def distribution_handler():
     """
