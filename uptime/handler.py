@@ -25,8 +25,16 @@ def uptime_handler():
       4. Number of seconds since no downtime
       5. String version of the uptime
       
+    I added the raw uptime data to the return statement, to store
+    this information in the DB because I intend to host this project
+    on a shared hosting plan and I prefer the client to perform
+    the extra cycles of formating the data than my shared server.
+    But in any case I need the extra information, I will have it
+    to perform extra calculation.
     """
     
+    seconds = 0
+
     with open("/proc/uptime", "r") as file:
         seconds = file.read().split()[0]
         
