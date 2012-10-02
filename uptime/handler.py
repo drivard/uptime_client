@@ -33,13 +33,13 @@ def uptime_handler():
     to perform extra calculation.
     """
     
-    seconds = 0
+    raw_seconds = 0
 
     with open("/proc/uptime", "r") as file:
-        seconds = file.read().split()[0]
+        raw_seconds = file.read().split()[0]
         
     # The string containing the uptime information
-    computer_uptime = str(datetime.timedelta(seconds=float(seconds)))
+    computer_uptime = str(datetime.timedelta(seconds=float(raw_seconds)))
     computer_uptime = computer_uptime.split('.')[0]
     
     # Extract the informations
@@ -50,7 +50,7 @@ def uptime_handler():
     seconds = s_time.split(':')[2]
     
     # Return the uptime minus the milliseconds information
-    return days, hours, minutes, seconds, computer_uptime, seconds
+    return days, hours, minutes, seconds, computer_uptime, raw_seconds
     
 def distribution_handler():
     """
