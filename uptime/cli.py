@@ -11,6 +11,42 @@ DESCRIPTION = '''This program sends the uptime information from this
 computer to the {website} website.'''.format(website=WEBSITE_NAME)
 USAGE = '''\t%prog [options]'''
 
+def display_options(options):
+    '''
+    
+    This function displays all the attributes that the uptime client 
+    gather and pushes to the website, based on the desired options.
+    
+    e.g.:
+        options::['host','arch','dist','uptime','version',]
+    
+    '''
+    
+    to_print = '\n\t'
+    
+    if "host" in options:
+        to_print += colorize("Computer:\t\t", CYAN)
+        to_print += hostname_handler() + '\n\t'
+        
+    if "uptime" in options:
+        days, hours, min, sec, c_uptime, raw_seconds = uptime_handler()
+        to_print += colorize("Uptime:\t\t\t", CYAN)
+        to_print += c_uptime + '\n\t'
+        
+    if "dist" in options:
+        to_print += colorize("Distribution:\t\t", CYAN)
+        to_print += distribution_handler() + '\n\t'
+    
+    if "version" in options:  
+        to_print += colorize("Distribution version:\t", CYAN)
+        to_print += version_handler() + '\n\t'
+        
+    if "arch" in options:
+        to_print += colorize("Architecture:\t\t", CYAN)
+        to_print += architecture_handler() + '\n\t'
+    
+    return to_print
+
 def main():
     '''
     
@@ -21,43 +57,51 @@ def main():
     
     parser = optparse.OptionParser(
         usage=infos(USAGE),
-        description=colorize(DESCRIPTION, PURPLE)
+        description=colorize(DESCRIPTION, PURPLE),
+        add_help_option=False
+    )
+    
+    parser.add_option(
+        "-h", "--help", 
+        action="store_true", dest="help",
+        help="Show this help message and exit."
     )
     
     parser.add_option(
         "-a", "--all", 
         action="store_true", dest="all",
-        help="Returns all the information available for this client."
+        help='''Return all the information available for this client.
+        Does not include the option "-p".'''
     )
     
     parser.add_option(
         "-r", "--arch", 
         action="store_true", dest="architecture",
-        help="Returns the architecture of the hardware platform."
+        help="Return the architecture of the hardware platform."
     )
     
     parser.add_option(
         "-d", "--distribution", 
         action="store_true", dest="distribution",
-        help="Returns the distribution name."
+        help="Return the distribution name."
     )
     
     parser.add_option(
         "-l", "--dist-version", 
         action="store_true", dest="dist_version",
-        help="Returns the distribution version number."
+        help="Return the distribution version number."
     )
     
     parser.add_option(
         "-n", "--hostname", 
         action="store_true", dest="hostname", 
-        help="Returns the hostname of the computer."
+        help="Return the hostname of the computer."
     )
     
     parser.add_option(
         "-p", "--push", 
         action="store_true", dest="push",
-        help="Pushes the uptime information to the website."
+        help="Push the uptime information to the website."
     )
     
     parser.add_option(
@@ -75,7 +119,7 @@ def main():
     '''
     If an option is selected, the options dictionary will be set with
     a key/value pair of the key being the name of the option and the
-    the value being True.
+    the value being True or None.
     
     e.g.: 
         options = {
@@ -85,36 +129,58 @@ def main():
                     'uptime': None,
                     'version': None,
                     'architecture': True,
-                    'distribution': None
+                    'distribution': None,
+                    'push': None,
                 }
     '''
     
     options, args = parser.parse_args()
+    options_to_display = ['', ]
+    number_of_options = 0
     
     if options.all:
-        print 'all'
-    elif options.architecture:
-        print architecture_handler()
-    elif options.distribution:
-        print distribution_handler()
-    elif options.dist_version:
-        print version_handler()
-    elif options.hostname:
-        print hostname_handler()
-    elif options.uptime:
-        print uptime_handler()
-    elif options.push:
-        print 'Will push to website'
-    elif options.version:
-        print VERSION
-    else:
-        parser.print_help()
+        options_to_display = ['host','arch','dist','uptime','version',]
+        number_of_options += 1
         
-    print options.get('architecture')
+    if options.architecture:
+        options_to_display.append('arch')
+        number_of_options += 1
+        
+    if options.distribution:
+        options_to_display.append('dist')
+        number_of_options += 1
+        
+    if options.dist_version:
+        options_to_display.append('version')
+        number_of_options += 1
+        
+    if options.hostname:
+        options_to_display.append('host')
+        number_of_options += 1
+        
+    if options.uptime:
+        options_to_display.append('uptime')
+        number_of_options += 1
+        
+    if options.version:
+        print VERSION
+        number_of_options += 1
+    
+    # Display the requested options
+    if options_to_display != ['', ]:
+        print display_options(options_to_display)
+        number_of_options += 1
+    
+    if options.push:
+        print 'Will push infos to website'
+        number_of_options += 1
+    
+    if options.help or number_of_options == 0:
+        parser.print_help()
+    
         
     return sys.exit(2)
-                
-                
-        
+    
+   
 if __name__ == "__main__":
     main()
