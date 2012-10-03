@@ -1,16 +1,20 @@
 #!/usr/bin/env python
-#
-# This file is a library of tool to collect the information
-# we need to provide to the API of uptime website in order 
-# to update the website with the server/desktop statistics.
-#
+
+'''
+
+This file is a library of tool to collect the information
+we need to provide to the API of uptime website in order 
+to update the website with the server/desktop statistics.
+
+'''
 
 import platform
 import datetime
 import re
 
 def uptime_handler():
-    """
+    '''
+    
     Read the uptime from /proc/uptime
     
     First value is the number of seconds the computer is running
@@ -31,7 +35,8 @@ def uptime_handler():
     the extra cycles of formating the data than my shared server.
     But in any case I need the extra information, I will have it
     to perform extra calculation.
-    """
+    
+    '''
     
     raw_seconds = 0
 
@@ -55,7 +60,8 @@ def uptime_handler():
     return days, hours, minutes, seconds, computer_uptime, raw_seconds
     
 def distribution_handler():
-    """
+    '''
+    
     Read the Distribution name from /etc/issue if it is unable to
     provide it using the platform module.
     
@@ -77,7 +83,8 @@ def distribution_handler():
     If I use platform.dist() for the distribution name,
     Scientific Linux returns Redhat. What is not totally
     wrong but not so true.
-    """
+    
+    '''
     
     distribution = platform.dist()[0]
     
@@ -89,23 +96,27 @@ def distribution_handler():
     return distribution.capitalize()
     
 def version_handler():
-    """
+    '''
+    
     This function returns the version of the distribution
     using the platform module.
     
-    """
+    '''
     return platform.dist()[1]
     
 def architecture_handler():
-    """
+    '''
+    
     This function returns the architecture of the hardware
     running the uptime client.
-    """
+    
+    '''
     
     return platform.architecture()[0]
     
 def hostname_handler():
-    """
+    '''
+    
     This function returns the hostname of the computer.
     
     I could use this code here to get the fully qualified computer name
@@ -113,6 +124,7 @@ def hostname_handler():
     hostname of the computer. This way no ones will be able to use the
     data from this website to hack a computer available on through
     Internet.
-    """
+    
+    '''
     
     return platform.node()
