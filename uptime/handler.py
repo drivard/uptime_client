@@ -50,11 +50,13 @@ def uptime_handler():
     computer_uptime = computer_uptime.split('.')[0]
     
     # Extract the informations
-    days = int(computer_uptime.split()[0])
-    s_time = computer_uptime.split()[2]
-    hours = int(s_time.split(':')[0])
-    minutes = int(s_time.split(':')[1])
-    seconds = int(s_time.split(':')[2])
+    days = 0
+    s_time = computer_uptime.split(' ')
+    
+    if len(s_time) > 1:
+        days = int(s_time[0])
+    
+    hours, minutes, seconds = map(lambda x: int(x), s_time[-1].split(':'))
     
     # Return the uptime minus the milliseconds information
     return days, hours, minutes, seconds, computer_uptime, raw_seconds
