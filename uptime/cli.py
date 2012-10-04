@@ -7,8 +7,9 @@ from uptime.handler import *
 import optparse
 import sys
 
-DESCRIPTION = '''This program sends the uptime information from this
-computer to the {website} website.'''.format(website=WEBSITE_NAME)
+DESCRIPTION = "This program sends the uptime information from this"
+DESCRIPTION += "computer to the {website} website."
+DESCRIPTION = DESCRIPTION.format(website=WEBSITE_NAME)
 USAGE = '''\t%prog [options]'''
 
 def display_options(options):
@@ -177,6 +178,7 @@ def main():
     
     if options.help or number_of_options == 0:
         parser.print_help()
+        print '\n'
     
         
     return sys.exit(2)
