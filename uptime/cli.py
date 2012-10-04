@@ -8,7 +8,7 @@ import optparse
 import sys
 
 DESCRIPTION = "This program sends the uptime information from this"
-DESCRIPTION += "computer to the {website} website."
+DESCRIPTION += " computer to the {website} website."
 DESCRIPTION = DESCRIPTION.format(website=WEBSITE_NAME)
 USAGE = '''\t%prog [options]'''
 
