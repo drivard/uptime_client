@@ -10,7 +10,6 @@ to update the website with the server/desktop statistics.
 
 import platform
 import datetime
-import re
 
 
 def uptime_handler():

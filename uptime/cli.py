@@ -138,7 +138,7 @@ def main():
     options, args = parser.parse_args()
     options_to_display = ['', ]
     number_of_options = 0
-
+    
     if options.all:
         options_to_display = ['host', 'arch', 'dist', 'uptime', 'version', ]
         number_of_options += 1
