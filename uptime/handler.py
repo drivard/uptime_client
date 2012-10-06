@@ -94,6 +94,7 @@ def distribution_handler():
     if distribution.lower() == 'redhat':
         with open("/etc/issue", "r") as file:
             release_infos = file.read()
+
         distribution = release_infos.split('release')[0]
 
     return distribution.capitalize()
