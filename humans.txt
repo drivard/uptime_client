@@ -1,0 +1,11 @@
+/* TEAM */
+Creator: Dominick Rivard.
+Site: dominick.rivard@gmail.com, www.drivard.com.
+Location: Montréal, Canada.
+
+/* SITE */
+Last update: 2012/10/05
+Standards: Python (Pep8),
+Components: ConfigParser,
+Software: Debian Squeeze, Centos 6.3, Scientific Linux 6.2, Notepad++,
+	  OpenVZ, Ubuntu 12.04, 

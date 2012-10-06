@@ -12,6 +12,7 @@ from uptime.__init__ import __config_folder__ as CONFIG_FOLDER
 from uptime.__init__ import __config_file__ as CONFIG_FILE
 from ConfigParser import ConfigParser
 import os
+import re
 
 def check_config_file():
     '''
@@ -58,18 +59,38 @@ def load_config_file(filename):
     
     return configs
     
-def write_config(filename, configs):
+def write_config(filename, section, option, value):
     '''
     
     This function will write the configuration to the file.
+    
+    '''
+    try:
+        config = ConfigParser()
+        config.read(filename)
+        
+        with open(filename, "w") as file:
+            config.set(section, option, value)
+            config.write(file)
+            
+    except:
+        raise Exception("configuration file exception",
+                        "Can't write to the configuration file.")
+        
+    return section, option, value
+    
+    
+def validate_option_value(value, exp):
+    '''
+    
+    This function will help validating the value that we will try to 
+    write in the configuration file.
     
     the regex is from http://www.regular-expressions.info/email.html
     @regex: "\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b"
     
     '''
     
-    config = ConfigParser()
-    config.read(filename)
- 
+    searched = re.search(exp, value)
     
     return True

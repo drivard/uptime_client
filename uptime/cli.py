@@ -72,50 +72,42 @@ def main():
         "-a", "--all",
         action="store_true", dest="all",
         help='''Return all the information available for this client.
-        Does not include the option "-p".'''
-    )
+        Does not include the option "-p".''')
 
     parser.add_option(
         "-r", "--arch",
         action="store_true", dest="architecture",
-        help="Return the architecture of the hardware platform."
-    )
+        help="Return the architecture of the hardware platform.")
 
     parser.add_option(
         "-d", "--distribution",
         action="store_true", dest="distribution",
-        help="Return the distribution name."
-    )
+        help="Return the distribution name.")
 
     parser.add_option(
         "-l", "--dist-version",
         action="store_true", dest="dist_version",
-        help="Return the distribution version number."
-    )
+        help="Return the distribution version number.")
 
     parser.add_option(
         "-n", "--hostname",
         action="store_true", dest="hostname",
-        help="Return the hostname of the computer."
-    )
+        help="Return the hostname of the computer.")
 
     parser.add_option(
         "-p", "--push",
         action="store_true", dest="push",
-        help="Push the uptime information to the website."
-    )
+        help="Push the uptime information to the website.")
 
     parser.add_option(
         "-u", "--uptime",
         action="store_true", dest="uptime",
-        help="Returns the uptime of the computer."
-    )
+        help="Returns the uptime of the computer.")
 
     parser.add_option(
         "-v", "--version",
         action="store_true", dest="version",
-        help="Returns the version of the client."
-    )
+        help="Returns the version of the client.")
 
     '''
     If an option is selected, the options dictionary will be set with
@@ -138,7 +130,7 @@ def main():
     options, args = parser.parse_args()
     options_to_display = ['', ]
     number_of_options = 0
-    
+
     if options.all:
         options_to_display = ['host', 'arch', 'dist', 'uptime', 'version', ]
         number_of_options += 1
