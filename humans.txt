@@ -1,6 +1,6 @@
 /* TEAM */
 Creator: Dominick Rivard.
-Site: dominick.rivard@gmail.com, www.drivard.com.
+Site: dominick.rivard at gmail dot com, www.drivard.com.
 Location: Montréal, Canada.
 
 /* SITE */
