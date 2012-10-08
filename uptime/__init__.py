@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import os
+
 """
 
 License: GPL3
@@ -14,3 +16,5 @@ __website_name__ = 'openuptimz.com'
 __config_file__ = '/.uptime/uptime.conf'
 
 __config_folder__ = '/.uptime/'
+
+__home_folder__ = os.path.expanduser('~')

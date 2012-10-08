@@ -5,6 +5,7 @@ from uptime.__init__ import __website_name__ as WEBSITE_NAME
 from uptime.colours import *
 from uptime.handler import *
 from uptime.prompt import *
+from uptime.config import *
 import optparse
 import sys
 
@@ -25,28 +26,28 @@ def display_options(options):
 
     '''
 
-    to_print = '\n\t'
+    to_print = '\n'
 
     if "host" in options:
-        to_print += colorize("Computer:\t\t", CYAN)
-        to_print += hostname_handler() + '\n\t'
+        to_print += colorize("Computer hostname:\t", CYAN)
+        to_print += hostname_handler() + '\n'
 
     if "uptime" in options:
         days, hours, min, sec, c_uptime, raw_seconds = uptime_handler()
         to_print += colorize("Uptime:\t\t\t", CYAN)
-        to_print += c_uptime + '\n\t'
+        to_print += c_uptime + '\n'
 
     if "dist" in options:
         to_print += colorize("Distribution:\t\t", CYAN)
-        to_print += distribution_handler() + '\n\t'
+        to_print += distribution_handler() + '\n'
 
     if "version" in options:
         to_print += colorize("Distribution version:\t", CYAN)
-        to_print += version_handler() + '\n\t'
+        to_print += version_handler() + '\n'
 
     if "arch" in options:
         to_print += colorize("Architecture:\t\t", CYAN)
-        to_print += architecture_handler() + '\n\t'
+        to_print += architecture_handler() + '\n'
 
     return to_print
 
@@ -115,6 +116,11 @@ def main():
         action="store_true", dest="config",
         help="Display the configuration prompt.")
 
+    parser.add_option(
+        "-s", "--show-config",
+        action="store_true", dest="show",
+        help="Display the configurations from the config file.")
+
     '''
     If an option is selected, the options dictionary will be set with
     a key/value pair of the key being the name of the option and the
@@ -167,6 +173,10 @@ def main():
 
     if options.config:
         prompt_logic()
+        number_of_options += 1
+
+    if options.show:
+        show_config()
         number_of_options += 1
 
     # Display the requested options

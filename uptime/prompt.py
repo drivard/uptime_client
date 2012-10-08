@@ -4,13 +4,24 @@
 from uptime.__init__ import __website_name__ as WEBSITE_NAME
 from uptime.validators import *
 from uptime.colours import *
+from uptime.config import *
 from getpass import getpass
+from base64 import *
 
 '''
 
 The prompt library contains all the function that will serve to ask
 the end-user his registration information in order to put them in the
 configuration file.
+
+'''
+
+INTRO = '''
+Welcome to the uptime client configurator.
+
+We inite you to visite {website} to register an account.
+If you already have an account please enter the following
+information.
 
 '''
 
@@ -22,16 +33,7 @@ def header():
 
     '''
 
-    intro = '''
-    Welcome to the uptime client configurator.
-
-    We inite you to visite the {website} to register an account.
-    If you already have an account please enter the following
-    information.
-    '''
-    intro = intro.format(website=WEBSITE_NAME)
-
-    print infos(intro)
+    print infos(INTRO.format(website=WEBSITE_NAME))
 
 
 def prompt_password():
@@ -103,8 +105,25 @@ def prompt_logic():
 
     '''
 
-    header()
-    username = prompt_username()
-    password = prompt_password()
+    try:
+        header()
+        # request the username and password
+        username = prompt_username()
+        password = prompt_password()
+        # use b64encode / b64decode to set the password in the config
+        # file and translate it at the website layer
+        password = b64encode(password)
+        # try to write the config to the file
+        filename = check_config_file()
+        # try to write to the configuration
+        write_config(filename, 'account', 'username', username)
+        write_config(filename, 'account', 'password', password)
+        # Display where it wrote the file
+        footer(filename)
+
+    except KeyboardInterrupt:
+        username = None
+        password = None
+        pass
 
     return username, password

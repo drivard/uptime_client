@@ -26,7 +26,7 @@ def colorize(message='', colour=ENDC):
     return colour + message + ENDC
 
 
-def warnings(message):
+def warn(message):
     '''
 
     Apply and display the warning message using the yellow colour.
