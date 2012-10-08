@@ -4,6 +4,7 @@ from uptime.__init__ import __version__ as VERSION
 from uptime.__init__ import __website_name__ as WEBSITE_NAME
 from uptime.colours import *
 from uptime.handler import *
+from uptime.prompt import *
 import optparse
 import sys
 
@@ -109,6 +110,11 @@ def main():
         action="store_true", dest="version",
         help="Returns the version of the client.")
 
+    parser.add_option(
+        "-c", "--config",
+        action="store_true", dest="config",
+        help="Display the configuration prompt.")
+
     '''
     If an option is selected, the options dictionary will be set with
     a key/value pair of the key being the name of the option and the
@@ -157,6 +163,10 @@ def main():
 
     if options.version:
         print VERSION
+        number_of_options += 1
+
+    if options.config:
+        prompt_logic()
         number_of_options += 1
 
     # Display the requested options
