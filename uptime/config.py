@@ -12,7 +12,6 @@ from uptime.__init__ import __config_folder__ as CONFIG_FOLDER
 from uptime.__init__ import __config_file__ as CONFIG_FILE
 from ConfigParser import ConfigParser
 import os
-import re
 
 
 def check_config_file():
