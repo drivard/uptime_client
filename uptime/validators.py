@@ -23,7 +23,7 @@ def validator(value, regex, compiled=False):
     if not compiled:
         regex = re.compile(regex, re.IGNORECASE)
 
-    return re.match(regex, value) != None
+    return re.search(regex, value) != None
 
 
 def validate_email(value):
