@@ -35,7 +35,7 @@ def header():
 
     '''
 
-    print infos(INTRO.format(website=WEBSITE_NAME))
+    return infos(INTRO.format(website=WEBSITE_NAME))
 
 
 def prompt_password():
@@ -99,7 +99,7 @@ def footer():
 
     filename = HOME + CONFIG_FILE
 
-    print DEFAULT_FOOTER.format(website=WEBSITE_NAME,
+    return DEFAULT_FOOTER.format(website=WEBSITE_NAME,
             filename=filename)
 
 
@@ -111,7 +111,7 @@ def prompt_logic():
     '''
 
     try:
-        header()
+        print header()
         # request the username and password
         username = prompt_username()
         password = prompt_password()
@@ -124,7 +124,7 @@ def prompt_logic():
         write_config('account', 'username', username)
         write_config('account', 'password', password)
         # Display where it wrote the file
-        footer()
+        print footer()
 
     except KeyboardInterrupt:
         username = None

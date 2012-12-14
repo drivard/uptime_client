@@ -8,6 +8,7 @@ Python Unit tests.
 
 from uptime.test.test_validators import test_validators
 from uptime.test.test_colours import test_colours
+from uptime.test.test_prompt import test_prompt
 import unittest
 import random
 
@@ -38,5 +39,10 @@ if __name__ == '__main__':
     
     print "Unittest::colours.py"
     suite = unittest.TestLoader().loadTestsFromTestCase(test_colours)
+    unittest.TextTestRunner(verbosity=2).run(suite)
+    print '\n'
+    
+    print "Unittest::prompt.py"
+    suite = unittest.TestLoader().loadTestsFromTestCase(test_prompt)
     unittest.TextTestRunner(verbosity=2).run(suite)
     print '\n'
