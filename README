@@ -2,18 +2,18 @@
 Python API to push the uptime information of your server our Website.
 
 ### Installation
-python setup.py install
+    python setup.py install
 
 ### Install the code coverage tool only if necessary
-pip install -U coverage
+    pip install -U coverage
 
 ## How to run the Unit tests
 
 ### First include the Python project in the python path
-export PYTHONPATH=$PYTHONPATH:~/uptime_client
+    export PYTHONPATH=$PYTHONPATH:~/uptime_client
 
 ### Run the tests
-python test.py
+    python test.py
 
 
 ##To do
