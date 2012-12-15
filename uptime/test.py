@@ -10,6 +10,7 @@ from uptime.test.test_validators import test_validators
 from uptime.test.test_colours import test_colours
 from uptime.test.test_prompt import test_prompt
 from uptime.test.test_cli import test_cli
+from uptime.test.test_config import test_config
 import unittest
 import random
 
@@ -50,5 +51,10 @@ if __name__ == '__main__':
     
     print "Unittest::cli.py"
     suite = unittest.TestLoader().loadTestsFromTestCase(test_cli)
+    unittest.TextTestRunner(verbosity=2).run(suite)
+    print '\n'
+    
+    print "Unittest::config.py"
+    suite = unittest.TestLoader().loadTestsFromTestCase(test_config)
     unittest.TextTestRunner(verbosity=2).run(suite)
     print '\n'
