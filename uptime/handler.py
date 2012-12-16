@@ -50,11 +50,8 @@ def uptime_handler():
     computer_uptime = computer_uptime.split('.')[0]
 
     # Extract the informations
-    days = 0
     s_time = computer_uptime.split(' ')
-
-    if len(s_time) > 1:
-        days = int(s_time[0])
+    days = int(s_time[0]) if len(s_time) > 1 else 0
 
     hours, minutes, seconds = map(lambda x: str(x).rjust(2, '0'), s_time[-1].split(':'))
 
