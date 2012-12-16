@@ -56,13 +56,13 @@ def uptime_handler():
     if len(s_time) > 1:
         days = int(s_time[0])
 
-    hours, minutes, seconds = map(lambda x: int(x), s_time[-1].split(':'))
+    hours, minutes, seconds = map(lambda x: str(x).rjust(2, '0'), s_time[-1].split(':'))
 
     # Return the uptime minus the milliseconds information
     return days, hours, minutes, seconds, computer_uptime, raw_seconds
 
 
-def distribution_handler():
+def distribution_handler(dist=None):
     '''
 
     Read the Distribution name from /etc/issue if it is unable to
@@ -88,14 +88,19 @@ def distribution_handler():
     wrong but not so true.
 
     '''
+    
+    distribution = None
+    
+    if dist is None:
+        distribution = platform.dist()[0]
 
-    distribution = platform.dist()[0]
-
-    if distribution.lower() == 'redhat':
+    if (distribution is not None 
+        and distribution.lower() == 'redhat') or (
+        dist is not None and dist.lower() == "redhat"):
+        
         with open("/etc/issue", "r") as file:
             release_infos = file.read()
-
-        distribution = release_infos.split('release')[0]
+            distribution = release_infos.split('release')[0]
 
     return distribution.capitalize()
 

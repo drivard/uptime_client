@@ -6,10 +6,12 @@ Python Cli.py Unit tests.
 
 '''
 
+from StringIO import StringIO
 from uptime.colours import *
 from uptime.handler import *
 from uptime.cli import *
 import unittest
+import mock
 
 options_infos = '\n'
 options_infos += colorize("Computer hostname:\t", CYAN)
@@ -29,8 +31,19 @@ class test_cli(unittest.TestCase):
     
     def setUp(self):
         self.infos = options_infos
+        self.dist = "Redhat"
         
     def test_displays_options(self):
         s_infos = display_options(['host','arch','dist','uptime','version',])
         
         self.assertEqual(self.infos, s_infos)
+        
+    def test_handler_distribution(self):
+        open_mock = mock.MagicMock()
+        # open_mock.return_value = 'Redhat'
+        
+        with mock.patch('__builtin__.open', open_mock):     
+            distribution = distribution_handler(dist="redhat")
+            
+            self.assertTrue(bool(distribution))
+        

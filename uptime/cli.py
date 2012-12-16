@@ -35,7 +35,14 @@ def display_options(options):
     if "uptime" in options:
         days, hours, min, sec, c_uptime, raw_seconds = uptime_handler()
         to_print += colorize("Uptime:\t\t\t", CYAN)
-        to_print += c_uptime + '\n'
+        to_print += str(days) + ' '
+        
+        if days > 1:
+            to_print += 'days, '
+        else:
+            to_print += 'day, '
+            
+        to_print += hours + ':' + min + ':' + sec + '\n'
 
     if "dist" in options:
         to_print += colorize("Distribution:\t\t", CYAN)
