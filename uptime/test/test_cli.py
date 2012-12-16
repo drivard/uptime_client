@@ -18,7 +18,12 @@ options_infos += colorize("Computer hostname:\t", CYAN)
 options_infos += hostname_handler() + '\n'
 days, hours, min, sec, c_uptime, raw_seconds = uptime_handler()
 options_infos += colorize("Uptime:\t\t\t", CYAN)
-options_infos += c_uptime + '\n'
+options_infos += str(days) + ' '
+if days > 1:
+    options_infos += 'days, '
+else:
+    options_infos += 'day, '
+options_infos += hours + ':' + min + ':' + sec + '\n'
 options_infos += colorize("Distribution:\t\t", CYAN)
 options_infos += distribution_handler() + '\n'
 options_infos += colorize("Distribution version:\t", CYAN)
