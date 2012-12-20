@@ -109,7 +109,7 @@ def version_handler():
     using the platform module.
 
     '''
-    return platform.dist()[1]
+    return platform.dist()[1].split('/')[0]
 
 
 def architecture_handler():
